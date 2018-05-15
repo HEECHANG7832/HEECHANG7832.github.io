@@ -23,15 +23,10 @@
 </div>
 
 <div class="container" style="padding:20px;">
-  <div id="portfolio" class="section scrollspy">
-
-  <h3 style="text-align:center;">{{site.portfolio_heading}}</h3>
-
-{% include portfolio_{{site.portfolio_type}}.html %}
-
+  <div id="blog" class="section scrollspy">
+  <h3 style="text-align:center;">Blog</h3>
+  {% include blog-feed.html %}
 </div>
-
-
 </div>
 
 <div class="container" style="padding:20px;">
@@ -41,28 +36,6 @@
  </div>
 </div>
 
-
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="{{site.parallax_image_two}}" alt="Unsplashed background img 3"></div>
-  </div>
-
-
-<div class="container" style="padding:20px;">
-  <div id="blog" class="section scrollspy">
-  <h3 style="text-align:center;">Blog</h3>
-  {% include blog-feed.html %}
-</div>
-</div>
-
 <div class="container" style="padding:20px;">
   <div id="contact" class="section scrollspy">
   <h3 style="text-align:center;">Contact</h3>
@@ -70,7 +43,15 @@
 </div>
 </div>
 
+<div class="container" style="padding:20px;">
+  <div id="portfolio" class="section scrollspy">
 
+  <h3 style="text-align:center;">{{site.portfolio_heading}}</h3>
+
+{% include portfolio_{{site.portfolio_type}}.html %}
+
+</div>
+</div>
 
 
 {% include nav-burger.html %}
