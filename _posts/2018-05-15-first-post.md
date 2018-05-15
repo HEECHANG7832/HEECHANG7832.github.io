@@ -1,6 +1,6 @@
 ---
 title: Markdown sample
-author: Chris
+author: HEECHANG
 layout: post
 ---
 # Heading
