@@ -1,137 +1,248 @@
-# Prologue - Jekyll Theme
+# Jekyll Material Theme
 
-[![Gem Version](https://badge.fury.io/rb/jekyll-theme-prologue.svg)](https://badge.fury.io/rb/jekyll-theme-prologue)
+A Jekyll Theme based on [Material Design](https://material.io/) using [Materialize](http://materializecss.com/).
 
-![Prologue Theme](assets/images/screenshot.png "Prologue Theme Screenshot")
+![CircleCI](https://img.shields.io/circleci/project/github/jameshamann/jekyll-material-theme.svg?style=for-the-badge)
+![Gem](https://img.shields.io/gem/dt/jekyll-material-theme.svg?style=for-the-badge) ![Gem](https://img.shields.io/gem/v/jekyll-material-theme.svg?style=for-the-badge)
 
-This is Prologue, a simple, single page responsive site template from [HTML5 UP](https://html5up.net/prologue), now available as a blog-aware Jekyll theme from [Chris Bobbe](https://chrisbobbe.github.io). It features a clean, minimalistic design and a sticky sidebar with navigation-linked scrolling.
+## Examples
 
-**Demo**: https://chrisbobbe.github.io/jekyll-theme-prologue/
+<a href="https://imgur.com/D9DSyuk"><img src="https://i.imgur.com/D9DSyuk.gif" title="source: imgur.com" /></a>
 
-# Added Features
 
-* **Blogging and multi-page features you expect from Jekyll**
-* Compatible with GitHub Pages
-* **[Formspree.io](https://formspree.io/) contact form integration** - just add your email to the `_config.yml` and it works!
-* Build your homepage with **custom scrolly sections** in the _sections folder
- * Set a **cover photo** for any section (not just the first), with alt text for screen readers and SEO
-* Add your **social profiles** easily in `_config.yml`.
-* Automatic search engine optimization (SEO) **meta tags** based on info you provide in `_config.yml` and frontmatter
-* **Google Analytics** built-in; just put your [Tracking ID](https://support.google.com/analytics/answer/1008080?hl=en) in `_config.yml` as `google_analytics`
-* Custom **404 page** (called 404.html; to activate, move it to your project directory).
+<a href="https://imgur.com/hlB1MOw"><img src="https://i.imgur.com/hlB1MOw.gif" title="source: imgur.com" /></a>
 
-# Installation
+<a href="https://imgur.com/qjhId2x"><img src="https://imgur.com/qjhId2x.gif" title="source: imgur.com" /></a>
+##### Cookie Policy
 
-There are two ways to get started (choose one):
+If you use cookies on your site, or choose to use Google Analytics, you're able to notify visitors with this prompt. The ```Thanks!``` dialog message can be customised in your ```_config.yml``` file.
 
-1. **Install the [jekyll-theme-prologue gem](https://rubygems.org/gems/jekyll-theme-prologue).** Instructions are in the [Jekyll docs](https://jekyllrb.com/docs/themes/#installing-a-theme). After running `bundle install`, you can find the theme files by running `open $(bundle show jekyll-theme-prologue)`.  A sample working `_config.yml` file ships with the gem; if you want to activate it, move it to your project's root directory. It will do nothing until you move it there, replacing the default `_config.yml` file.
-2. **Fork or clone the [GitHub repository](https://github.com/chrisbobbe/jekyll-theme-prologue).** If you want to use [GitHub Pages](https://pages.github.com/), create a branch named `gh-pages`, and replace `theme: jekyll-theme-prologue` with `remote_theme: chrisbobbe/jekyll-theme-prologue` in the provided `_config.yml` ([GitHub Pages now supports open-source themes on GitHub](https://github.com/blog/2464-use-any-theme-with-github-pages)).
+<a href="https://imgur.com/O7sICnY"><img src="https://i.imgur.com/O7sICnY.gif" title="source: imgur.com" /></a>
 
-Next, make sure that `url` and `base_url` are set for your own website in `_config.yml`. For local testing, make them both blank. Add a photo avatar to your project, then set `avatar: path/to/your/avatar.jpg` in _config.yml; for example, `avatar: assets/images/avatar.jpg` (48x48 pixels works best). Poke around the sample `_config.yml` file to see how you can add your social profiles.
+##### Tools and Experience Section
 
-# Build your homepage
+If you'd like to display some of your skills and experience, you can do so through using the section below.
 
-1. **Your `_config.yml` file must include the following line or your homepage won't work**: `collections: [sections]`. This tells Jekyll to look in the _sections folder (which you will create) for your content and render it all on one page.
+<a href="https://imgur.com/DjtrH6s"><img src="https://imgur.com/DjtrH6s.png" title="source: imgur.com" /></a>
 
-2. **Create a `_sections` folder** in your project's root directory and start adding content to your homepage. Set a cover photo in any of the sections by adding `cover-photo: path/to/photo.jpg` and `cover-photo-alt: your alt text here` to the section's frontmatter. Sample content is provided in the [GitHub repository](https://github.com/chrisbobbe/jekyll-theme-prologue/tree/master/_sections).
 
-All new sections should be added as html or Markdown documents in the `_sections` folder. The following section variables can be set with [frontmatter](https://jekyllrb.com/docs/frontmatter/):
-- `title` (required)
-- `order` (required; orders the sequence of sections on the page. Example: `1`)
-- `cover-photo` (optional; sets a background image for the section. Example: `assets/images/banner.jpg`)
-- `cover-photo-alt` (required if using a cover photo. Describes the photo for screen readers and SEO; e.g. "Dome of Light art installation, Kaohsiung, Taiwan")
-- `icon` (optional; see [Font Awesome](http://fontawesome.io/icons/) for icon codes. Example: `fa-github`)
-- `auto-header` (optional; "use-title" is default, "none" for no header, or custom header text)
-- `hide` (optional; if `true`, the section won't appear)
+### [Live Demo](https://jameshamann.com)
 
-# Start blogging!
+## Installation
 
-Jekyll has great resources to get you started writing blog posts. Check out [this Jekyll Docs page](https://jekyllrb.com/docs/posts/) first. When you've written a post or two, copy the following into a new file in your project directory called `blog.html`, and you'll see a link to your blog from the homepage:
+Add this line to your Jekyll site's `Gemfile`:
 
-```
----
-layout: blog
-title: My Blog
----
+```ruby
+gem "jekyll-material-theme"
 ```
 
--- and that's it!
+And add this line to your Jekyll site's `_config.yml`:
 
-# Add a page
-
-To add a page, just make a new .html or .md file in your project directory. There's an example called `reading-list` [provided](https://github.com/chrisbobbe/jekyll-theme-prologue/blob/master/reading-list.md) with the GitHub repository. Add this frontmatter:
-
-```
----
-title: My New Page
-layout: page
----
+```yaml
+theme: jekyll-material-theme
 ```
 
-You can also set these page variables in the frontmatter, if you want:
-- `subtitle`
-- `order` (orders links in the nav menu, e.g. `1`)
-- `icon` (optional; see [Font Awesome](http://fontawesome.io/icons/) for icon codes. Example: `fa-github`)
-- `hide` (optional; if `true`, a link won't appear in the nav menu. All this does is remove the nav link; your page will still be served to anyone who has the URL.)
+And then execute:
 
-**This same set of frontmatter variables (including `title`) can also be set in `index.md` and `blog.html`.** You may want to give them titles, or hide the homepage link with `hide: true` if the homepage is the only page.
+    $ bundle
 
-For advanced SEO, this theme also lets you add `permalink` (see [Jekyll Docs](https://jekyllrb.com/docs/permalinks/#where-to-configure-permalinks)), `robots` (string, e.g. "noindex, nofollow"), and `canonical` (boolean; true is default) to any page or post.
+Or install it yourself as:
 
-# Contributing
+    $ gem install jekyll-material-theme
 
-Please feel free to submit issues and feature requests!
+## Usage
 
-# Credits
+The ```_config.yml``` file has the following options.
 
-Thanks to @andrewbanchich for his many Jekyll adaptations of HTML5 UP's elegant themes, which helped and inspired me, and of course many thanks to HTML5 UP.
+Please ensure to copy this sample before serving up your site as some variables are required in order to make the site run correctly.
 
-Original README from HTML5 UP:
+```yaml
+title: Your awesome title
+name: Your Name
+email: your-email@example.com
+description: Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+
+theme: jekyll-material-theme
+
+parallax_image_one: assets/images/startup3.jpg # These are the images used for the parallax background
+parallax_image_two: assets/images/startup3.jpg
+
+# Settings for the porfolio section
+
+portfolio_heading: Portfolio
+portfolio_type: cards #cards or carousel
+
+project_one: "First Project"
+project_one_description: Describe your project!
+project_one_url: https://github.com/jameshamann/jekyll-material-theme
+project_one_icon: location_on # these are from materiailize css, the full collection is here: http://materializecss.com/icons.html
+
+project_two: Second Project
+project_two_description: Describe your project!
+project_two_url: https://github.com/jameshamann/jekyll-material-theme
+project_two_icon: photo_camera
+
+
+project_three: Third Project
+project_three_description: Describe your project!
+project_three_url: https://github.com/jameshamann/jekyll-material-theme
+project_three_icon: hotel
+
+
+project_four: Fourth Project
+project_four_description: Describe your project!
+project_four_url: https://github.com/jameshamann/jekyll-material-theme
+project_four_icon: restaurant
+
+# Skill icons from https://konpa.github.io/devicon/
+
+skills:
+  - name: amazonwebservices
+  - name: android
+  - name: angularjs
+  - name: apache
+  - name: appcelerator
+  - name: apple
+  - name: atom
+  - name: babel
+  - name: backbonejs
+  - name: bitbucket
+  - name: bootstrap
+  - name: bower
+  - name: c
+  - name: chrome
+  - name: codeigniter
+  - name: coffescript
+  - name: confluence
+  - name: cplusplus
+  - name: csharp
+  - name: css3
+  - name: cucumber
+  - name: d3js
+  - name: debian
+  - name: devicon
+  - name: django
+  - name: docker
+  - name: doctrine
+  - name: dot-net
+  - name: drupal
+  - name: erlang
+  - name: facebook
+  - name: firefox
+  - name: foundation
+  - name: gatling
+  - name: gimp
+  - name: git
+  - name: github
+  - name: gitlab
+  - name: go
+  - name: google
+  - name: gradle
+  - name: grunt
+  - name: gulp
+  - name: heroku
+  - name: html5
+  - name: ie10
+  - name: illustrator
+  - name: inkscape
+  - name: itellij
+  - name: java
+  - name: jasmine
+  - name: javascript
+  - name: laravel
+  - name: less
+  - name: linux
+  - name: meteor
+  - name: mocha
+  - name: mongodb
+  - name: moodle
+  - name: mysql
+  - name: nginx
+  - name: nodejs
+  - name: nodewebkit
+  - name: oracle
+  - name: photoshop
+  - name: php
+  - name: phpstorm
+  - name: protractor
+  - name: postgresql
+  - name: python
+  - name: pycharm
+  - name: rails
+  - name: react
+  - name: redhat
+  - name: redis
+  - name: ruby
+  - name: rubymine
+  - name: safari
+  - name: sass
+  - name: sequelize
+  - name: slack
+  - name: sourcetree
+  - name: ssh
+  - name: swift
+  - name: symfony
+  - name: tomcat
+  - name: travis
+  - name: trello
+  - name: twitter
+  - name: typescript
+  - name: ubuntu
+  - name: vim
+  - name: visualstudio
+  - name: vuejs
+  - name: webpack
+  - name: webstorm
+  - name: windows8
+  - name: wordpress
+  - name: yii
+  - name: zend
+
+icon_size: 50 # font-size of icons in px
+colored: colored # Leave blank for black and white icons
+
+project_button: Github
+
+github: https://github.com/jameshamann/jekyll-material-theme
+medium: https://medium.com
+
+baseurl: # If your site is located at /blog or /home, change it here, otherwise leave it empty
+url: http://localhost:4000/ # The URL of your site
+
+# Google tracking, if both are filled, tag manager will prevail. Set up GA through GTM in that case
+tag_manager_id: # This looks something like GTM-XXXXXXX
+google_analytics_tracking_id: # This looks something like UA-000000000-0 Head over to https://analytics.google.com/ to setup.
+
+cookie_accept_message: Thanks! # The pop-up dialog that appears after accepting the cookie notice.
+
+syntax_highlighting: true # include the css for syntax highlighting
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+plugins:
+  - jekyll-feed
+  - jekyll-assets
+  - jekyll-minifier
 
 ```
-Prologue by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
+## Contributing
 
-This is Prologue, a simple, single page responsive site template. It features a
-clean, minimalistic design and a sticky sidebar with navigation-linked scrolling.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jameshamann/jekyll-material-theme. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-Demo content images* are courtesy of the ridiculously talented Felicia Simion. Check out
-more of her amazing work over at deviantART:
+## Development
 
-http://ineedchemicalx.deviantart.com/
+To set up your environment to develop and further customise this theme, fork the repo and explore the ```_assets``` directory, which includes all the ```css, js``` and ```font``` folders. If you're adding a feature, please add some tests in the ```spec``` directory to ensure everything works as intended.
 
-(* = Not included! Only meant for use with my own on-site demo, so please do NOT download
-and/or use any of Felicia's work without her explicit permission!)
+## Contributors
 
-Demo banner images* courtesy of Unsplash, a radtastic collection of CC0 (public domain)
-images you can use for pretty much whatever.
+- [James Hamann](https://github.com/jameshamann)
+- [Jam Rizzer](https://github.com/jamrizzi)
+- [Kobes](https://github.com/Kobes)
 
-(* = Not included)
+## [Changelog](https://github.com/jameshamann/jekyll-material-theme/blob/master/CHANGELOG.md)
 
-AJ
-aj@lkn.io | @ajlkn
+## License
 
-PS: Not sure how to get that contact form working? Give formspree.io a try (it's awesome).
-
-
-Credits:
-
-	Demo Images:
-		Felicia Simion (ineedchemicalx.deviantart.com)
-		Unsplash (unsplash.com)
-
-	Icons:
-		Font Awesome (fortawesome.github.com/Font-Awesome)
-
-	Other
-		jQuery (jquery.com)
-		html5shiv.js (@afarkas @jdalton @jon_neal @rem)
-		CSS3 Pie (css3pie.com)
-		background-size polyfill (github.com/louisremi)
-		Respond.js (j.mp/respondjs)
-		jquery.scrolly (@ajlkn)
-		jquery.scrollzer (@ajlkn)
-		Skel (skel.io)
-```
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
