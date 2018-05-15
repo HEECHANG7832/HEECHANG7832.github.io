@@ -1,5 +1,5 @@
 ---
-title: First Post
+title: Markdown 문법 sample
 author: Chris
 layout: post
 ---

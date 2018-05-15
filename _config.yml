@@ -1,14 +1,14 @@
 title:             Blog
 email:             facee22av@naver.com
 description:       HEECHANG KWON
-author:            HEECHANG
+author:            HEECHANG KWON
 baseurl:
 url:               "http://heechang7832.github.io"
 
 # Social Profiles
-twitter_username:  SBootstrap
-github_username:   BlackrockDigital
-facebook_username: StartBootstrap
+twitter_username:
+github_username:   HEECHANG7832
+facebook_username:
 
 # Build settings
 markdown:          kramdown
