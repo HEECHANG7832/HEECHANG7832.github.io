@@ -1,4 +1,4 @@
-title:             알고리즘 너무 재밌다
+title:             Blog
 email:             facee22av@naver.com
 description:       HEECHANG KWON
 author:            HEECHANG KWON
@@ -12,7 +12,7 @@ facebook_username:
 
 # Build settings
 markdown:          kramdown
-paginate:          5
+paginate:          10
 paginate_path:     "/posts/page:num/"
 plugins:
   - jekyll-feed
