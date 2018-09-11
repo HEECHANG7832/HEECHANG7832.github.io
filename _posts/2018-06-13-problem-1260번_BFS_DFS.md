@@ -1,11 +1,11 @@
 ---
-title: 1260번BFS_DFS
-author: HEECHANG
 layout: post
+title: "1260번BFS_DFS"
+categories:
+  - problem
+tags:
+  - problem
 ---
-
-# 1260번BFS_DFS
-### Algorithm Study(6.13)
 
 [1260](https://www.acmicpc.net/problem/1260)
 

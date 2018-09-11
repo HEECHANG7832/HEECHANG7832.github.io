@@ -1,11 +1,11 @@
 ---
-title: 1011번_Fly me to the Alpha Centauri
-author: HEECHANG
 layout: post
+title: "1011번_Fly me to the Alpha Centauri"
+categories:
+  - problem
+tags:
+  - problem
 ---
-
-# 1011번_Fly me to the Alpha Centauri
-### Algorithm Study(6.13)
 
 [1011](https://www.acmicpc.net/problem/1011)
 
