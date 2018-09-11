@@ -1,11 +1,11 @@
 ---
-title: 1013번_Contact
-author: HEECHANG
 layout: post
+title: "1013번_Contact"
+categories:
+  - problem
+tags:
+  - problem
 ---
-
-# 1013번_Contact
-### Algorithm Study(5.18)
 
 [1013](https://www.acmicpc.net/problem/1013)
 
