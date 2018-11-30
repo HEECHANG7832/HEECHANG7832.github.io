@@ -4,7 +4,7 @@ highlighter:      rouge
 
 # Setup
 title:            NOTEPAD
-tagline:          'A Jekyll theme'
+tagline:          ''
 description:      'A Computer Programer addicted by algorithm problem'
 url:              https://heechang7832.github.io
 baseurl:
