@@ -3,9 +3,9 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            NOTEPAD
+title:            HEECHANG
 tagline:          ''
-description:      'A Computer Programer addicted by algorithm problem'
+description:      'BackEnd Programmer'
 url:              https://heechang7832.github.io
 baseurl:
                   # the optional subpath of your site, e.g. "/blog"

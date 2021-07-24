@@ -1,7 +1,5 @@
 ---
-layout: category
-title: problem
-category: problem
+layout: spring
+title: Spring & SpringBoot
+category: Spring & springBoot
 ---
-
-##내가 푼 문제들
