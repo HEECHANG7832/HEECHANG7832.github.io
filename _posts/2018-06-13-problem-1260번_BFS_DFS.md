@@ -2,7 +2,7 @@
 layout: post
 title: "1260번BFS_DFS"
 categories:
-  - problem
+  - Algorithm problem
 tags:
   - problem
 ---
