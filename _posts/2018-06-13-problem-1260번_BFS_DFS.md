@@ -2,9 +2,9 @@
 layout: post
 title: "1260번BFS_DFS"
 categories:
-  - Algorithm problem
+  - Algorithm Problem
 tags:
-  - problem
+  - Algorithm Problem
 ---
 
 [1260](https://www.acmicpc.net/problem/1260)

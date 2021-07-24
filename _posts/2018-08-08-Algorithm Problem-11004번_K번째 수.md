@@ -1,5 +1,4 @@
 ---
----
 layout: post
 title: "11004번_K번째 수"
 categories:
