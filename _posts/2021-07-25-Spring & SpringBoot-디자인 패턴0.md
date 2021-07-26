@@ -107,3 +107,53 @@ public class Main{
   }
 }
 ```
+
+### Decorator Pattern
+- 개방폐쇄 원칙, 의존역전원칙
+- 기존 뼈대는 유지하되, 필요한 형태로 꾸밀때 사용, 확장이 필요한 경우 상속의 대안으로 활용
+
+```java
+public interface ICar{
+  int getPrice();
+  void showPrice();
+}
+
+public class Audi implements ICar{
+  private int price;
+
+
+  public Audi(int price){
+    this.price = price;
+  }
+
+  @Override
+  public int getPrice(){
+    return price;
+  }
+
+  @Override
+  public void showPrice(){
+    System.out.println("price " + price)
+  }
+}
+
+public class AudiDecorator implements ICar{
+  protected ICar audi;
+  protected String modelName;
+  protected int modelPrice;
+
+  //@AllArgmentConstrutor
+  //Override
+}
+
+public class A3 extends AudiDecorator{
+  public A3(ICar audi, String modelName){
+    super(audi, modelName, 1000);
+  }
+}
+public class A4 extends AudiDecorator{
+  public A4(ICar audi, String modelName){
+    super(audi, modelName, 2000);
+  }
+}
+```
