@@ -11,6 +11,9 @@ tags:
 
 - 어떠한 객체가 유일하게 1개만 존재할때
 - TCP Socket 통신에서 서버와 연결된 connect 객체에 주로 사용한다
+
+
+
 ```java
 
 public class SocketClient{
@@ -35,6 +38,7 @@ public class SocketClient{
 
 ### Adapter Pattern
 - 호환성이 없는 기존 클래스의 인터페이스를 변환하여 재사용 할 수 있게 한다
+
 ```java
 public interface Electronic110V{
   void powerOn();
