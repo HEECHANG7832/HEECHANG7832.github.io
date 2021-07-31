@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            HEE'S
+title:            HEE
 tagline:          ''
 description:      'Backend Developer'
 url:              https://heechang7832.github.io
