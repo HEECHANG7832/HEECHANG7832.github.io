@@ -2,9 +2,9 @@
 layout: post
 title: "웹 개발 기본"
 categories:
-  - Spring & SpringBoot
+  - SpringBoot
 tags:
-  - Spring & SpringBoot
+  - SpringBoot
 ---
 
 ### Web의 기본 3가지 요소

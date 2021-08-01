@@ -2,9 +2,9 @@
 layout: post
 title: "1011번_Fly me to the Alpha Centauri"
 categories:
-  - problem
+  - Algorithm Problem
 tags:
-  - problem
+  - Algorithm Problem
 ---
 
 [1011](https://www.acmicpc.net/problem/1011)

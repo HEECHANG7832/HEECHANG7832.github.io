@@ -2,9 +2,9 @@
 layout: post
 title: "객체지향의 4대 특성"
 categories:
-  - Spring & SpringBoot
+  - SpringBoot
 tags:
-  - Spring & SpringBoot
+  - SpringBoot
 ---
 
 ### 1. 캡슐화

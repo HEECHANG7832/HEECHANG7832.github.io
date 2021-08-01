@@ -2,9 +2,9 @@
 layout: post
 title: "객체지향 설계 5원칙"
 categories:
-  - Spring & SpringBoot
+  - SpringBoot
 tags:
-  - Spring & SpringBoot
+  - SpringBoot
 ---
 
 

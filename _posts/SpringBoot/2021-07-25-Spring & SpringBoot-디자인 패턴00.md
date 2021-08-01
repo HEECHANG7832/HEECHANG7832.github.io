@@ -2,9 +2,9 @@
 layout: post
 title: "디자인 패턴3"
 categories:
-  - Spring & SpringBoot
+  - SpringBoot
 tags:
-  - Spring & SpringBoot
+  - SpringBoot
 ---
 
 ### Observer pattern

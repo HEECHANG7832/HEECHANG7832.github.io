@@ -2,9 +2,9 @@
 layout: post
 title: "1013번_Contact"
 categories:
-  - problem
+  - Algorithm Problem
 tags:
-  - problem
+  - Algorithm Problem
 ---
 
 [1013](https://www.acmicpc.net/problem/1013)
