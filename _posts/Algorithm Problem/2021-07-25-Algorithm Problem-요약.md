@@ -8,9 +8,6 @@ tags:
 ---
 
 
-### 기능개발
-
-
 ```java
 //해쉬
 
@@ -45,9 +42,10 @@ String[] array = arrayList.toArray(arrayList);
 
 
 PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+PriorityQueue<Integer> pq= new PriorityQueue<>(Arrays.stream(scoville).boxed().collect(Collectors.toList()));
 
 //int list to LinkedList
 Queue<Integer> queue = (LinkedList<Integer>) Arrays.stream(priorities).boxed().collect(Collectors.toList());
-
+Queue<Integer> queue = new LinkedList<Integer>(Arrays.stream(truck_weights).boxed().collect(Collectors.toList()));
 
 ```
