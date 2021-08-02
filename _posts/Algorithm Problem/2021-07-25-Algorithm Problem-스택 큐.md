@@ -110,3 +110,78 @@ class Solution {
 ```
 
 ### 다리를 지나는 트럭
+
+
+
+```java
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+class Solution {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+        int answer = 0;
+
+              Queue<Integer> queue = new LinkedList<>();
+
+        int tweight = 0;
+        int i = 0;
+        while (true) {
+            if(i == truck_weights.length) break;
+
+            if(queue.size() == bridge_length){
+                tweight -= queue.poll();
+            }
+
+            if(tweight + truck_weights[i] > weight){
+                queue.offer(0);
+                answer++;
+            }else {
+                answer++;
+                tweight += truck_weights[i];
+                queue.offer(truck_weights[i]);
+                i++;
+            }
+        }
+
+        return answer + bridge_length;
+    }
+}
+
+```
+
+### 주식가격
+
+```java
+import java.util.*;
+class Solution {
+    public int[] solution(int[] prices) {
+        int[] answer = new int[prices.length];
+
+        Stack<Integer> stack = new Stack<>();
+
+
+        stack.push(0);
+        for (int i = 1; i < prices.length; i++) {
+            //스택에 저장된 시간 위치의 값보다 새로 들어오는 값이 크면
+            while(!stack.isEmpty() && prices[i] < prices[stack.peek()]){
+                answer[stack.peek()] = i - stack.peek();
+                stack.pop();
+            }
+            //새로운 시간 저장
+            stack.push(i);
+            //stack.stream().forEach(System.out::print);
+           // System.out.println();
+        }
+
+        for(int a : stack){
+            answer[a] = prices.length - a - 1;
+        }
+
+        //Arrays.stream(answer).forEach(System.out::println);
+
+
+        return answer;
+    }
+}
+```
