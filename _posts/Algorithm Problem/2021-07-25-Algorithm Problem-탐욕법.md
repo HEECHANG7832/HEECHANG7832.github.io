@@ -29,8 +29,8 @@ class Solution {
           }
         }
 
-        int answer = n - lost.length;
-        List<Integer> lostList = (ArrayList<Integer>)Arrays.stream(lost).boxed().collect(Collectors.toList());
+
+        List<Integer> lostList = (ArrayList<Integer>)Arrays.stream(lost).boxed().map(a -> a > 0).collect(Collectors.toList());
 
         for(int i = 0; i < reserve.length; i++)
         {
@@ -44,6 +44,7 @@ class Solution {
                 }
             }
         }
+        int answer = n - lostList.length;
 
 
         return answer;
