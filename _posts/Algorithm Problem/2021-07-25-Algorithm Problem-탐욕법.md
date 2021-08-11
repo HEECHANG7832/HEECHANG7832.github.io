@@ -80,4 +80,68 @@ class Solution {
         return sb.toString();
     }
 }
+
+import java.util.Stack;
+class Solution {
+    public String solution(String number, int k) {
+        char[] result = new char[number.length() - k];
+        Stack<Character> stack = new Stack<>();
+
+        for (int i=0; i<number.length(); i++) {
+            char c = number.charAt(i);
+            while (!stack.isEmpty() && stack.peek() < c && k-- > 0) {
+                stack.pop();
+            }
+            stack.push(c);
+        }
+        for (int i=0; i<result.length; i++) {
+            result[i] = stack.get(i);
+        }
+        return new String(result);
+    }
+}
+```
+
+
+### 구명보트
+
+```java
+
+
+import java.util.Arrays;
+import java.util.Collections;
+
+
+class Solution {
+    public int solution(int[] people, int limit) {
+        int answer = 0;
+
+        int[] check = new int[people.length];
+
+        Integer[] p =  Arrays.stream(people).boxed().toArray( Integer[]::new );
+        Arrays.sort(p, Collections.reverseOrder());
+
+        //몸무게가 젤 큰 사람부터
+        for (int i = 0; i < p.length; i++) {
+            if(check[i] != -1){ //아직 안탄 사람만
+
+                //한사람 태운다
+                int l = limit - p[i];
+                check[i] = -1;
+
+                //그사람 다음 사람부터 최대 몸무게로 사람들을 대려감
+                for (int j = i + 1; j < p.length; j++) {
+                    if(p[j] <= l){
+                        l -= p[j];
+                        check[j] = -1; //태움
+                    }
+                }
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
+
 ```

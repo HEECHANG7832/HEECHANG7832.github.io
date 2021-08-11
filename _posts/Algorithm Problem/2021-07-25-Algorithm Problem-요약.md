@@ -48,4 +48,12 @@ PriorityQueue<Integer> pq= new PriorityQueue<>(Arrays.stream(scoville).boxed().c
 Queue<Integer> queue = (LinkedList<Integer>) Arrays.stream(priorities).boxed().collect(Collectors.toList());
 Queue<Integer> queue = new LinkedList<Integer>(Arrays.stream(truck_weights).boxed().collect(Collectors.toList()));
 
+
+// To boxed array
+Integer[] what = Arrays.stream( data ).boxed().toArray( Integer[]::new );
+Integer[] ever = IntStream.of( data ).boxed().toArray( Integer[]::new );
+
+// To boxed list
+List<Integer> you  = Arrays.stream( data ).boxed().collect( Collectors.toList() );
+List<Integer> like = IntStream.of( data ).boxed().collect( Collectors.toList() );
 ```
