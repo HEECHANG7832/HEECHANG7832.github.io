@@ -51,3 +51,33 @@ class Solution {
     }
 }
 ```
+
+
+### 큰 수 만들기
+
+```java
+class Solution {
+    public String solution(String number, int k) {
+
+
+        StringBuffer sb = new StringBuffer();
+        //골라야 하는 갯수, 윈도우 사이즈
+        for(int i = 0, index = -1; i < number.length() - k; i++){
+
+            char max = 0;
+            //스트링에서 현 위치부터 윈도우 사이즈만큼 최대값 고르고
+            //다음 찾는 위치 변경
+            for (int j = index + 1; j <= k + i; j++) {
+                if (max < number.charAt(j)) {
+                    index = j;
+                    max = number.charAt(j);
+                }
+            }
+            sb.append(max);
+        }
+
+
+        return sb.toString();
+    }
+}
+```
