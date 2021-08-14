@@ -11,47 +11,73 @@ tags:
 
 ```java
 import java.util.*;
-import java.util.stream.Collectors;
-
 class Solution {
     public int solution(int n, int[] lost, int[] reserve) {
 
         Arrays.sort(lost);
         Arrays.sort(reserve);
 
+        int count = 0;
         for(int i=0; i<lost.length; i++) {
-          for(int j=0; j<reserve.length; j++) {
-              if(lost[i]==reserve[j]) {
-                  lost[i] = -1;
-                  reserve[j] = -1;
-                  break;
-              }
-          }
-        }
-
-
-        List<Integer> lostList = (ArrayList<Integer>)Arrays.stream(lost).boxed().map(a -> a > 0).collect(Collectors.toList());
-
-        for(int i = 0; i < reserve.length; i++)
-        {
-            for(Integer j : lostList){
-                if(reserve[i] != -1){
-                  if(reserve[i] - 1 <= j && reserve[i] + 1 >= j){
-                      lostList.remove(j);
-                      answer++;
-                      break;
-                  }
+            for(int j=0; j<reserve.length; j++) {
+                if(lost[i]==reserve[j]) {
+                    lost[i] = -1;
+                    reserve[j] = -1;
+                    count++;
+                    break;
                 }
             }
         }
-        int answer = n - lostList.length;
 
 
+
+        int answer = n - lost.length + count;
+
+        for (int i = 0; i < lost.length; i++) {
+            if(lost[i] != -1) {
+                for (int j = 0; j < reserve.length; j++) {
+                    if (reserve[j] != -1) {
+                        if (lost[i] + 1 == reserve[j] || lost[i] - 1 == reserve[j]) {
+
+                            reserve[j] = -1;
+                            answer++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(answer);
+        return answer;
+    }
+}
+
+class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+        int[] people = new int[n];
+        int answer = n;
+
+        for (int l : lost)
+            people[l-1]--;
+        for (int r : reserve)
+            people[r-1]++;
+
+        for (int i = 0; i < people.length; i++) {
+            if(people[i] == -1) {
+                if(i-1>=0 && people[i-1] == 1) {
+                    people[i]++;
+                    people[i-1]--;
+                }else if(i+1< people.length && people[i+1] == 1) {
+                    people[i]++;
+                    people[i+1]--;
+                }else
+                    answer--;
+            }
+        }
         return answer;
     }
 }
 ```
-
 
 ### 큰 수 만들기
 
@@ -110,8 +136,6 @@ class Solution {
 
 import java.util.Arrays;
 import java.util.Collections;
-
-
 class Solution {
     public int solution(int[] people, int limit) {
         int answer = 0;
@@ -129,19 +153,66 @@ class Solution {
                 int l = limit - p[i];
                 check[i] = -1;
 
-                //그사람 다음 사람부터 최대 몸무게로 사람들을 대려감
+                //그사람 다음 사람부터 최대 몸무게로 사람들을 1명 대려감
                 for (int j = i + 1; j < p.length; j++) {
-                    if(p[j] <= l){
-                        l -= p[j];
+                    if(check[j] != -1 && p[j] <= l){
                         check[j] = -1; //태움
+                        //System.out.println(j);
+                        break;
                     }
                 }
                 answer++;
             }
         }
+        System.out.println(answer);
+        return answer;
+    }
+}
+
+class Solution {
+    public int solution(int[] people, int limit) {
+        int answer = 0;
+
+        int[] check = new int[people.length];
+
+        Integer[] p =  Arrays.stream(people).boxed().toArray( Integer[]::new );
+        Arrays.sort(p, Collections.reverseOrder());
+
+        //몸무게가 큰 사람부터
+        int j = p.length - 1;
+        for (int i = 0; i < p.length; i++) {
+
+            if(p[i] > limit / 2){
+                int l = limit - p[i]; //남은 무게
+                //무게 작은 순으로 데려갈 사람이 있는지
+                if(p[j] <= l){
+                    j--;
+                }
+                answer++;
+            }else{
+                answer += Math.ceil((double)(j - i + 1) / 2);
+                break;
+            }
+
+        }
+
+        System.out.println(answer);
 
         return answer;
     }
 }
 
+import java.util.Arrays;
+
+class Solution {
+    public int solution(int[] people, int limit) {
+        Arrays.sort(people);
+        int i = 0, j = people.length - 1;
+        for (; i < j; --j) {
+            if (people[i] + people[j] <= limit)
+                ++i;
+        }
+        return people.length - i;
+    }
+}
 ```
