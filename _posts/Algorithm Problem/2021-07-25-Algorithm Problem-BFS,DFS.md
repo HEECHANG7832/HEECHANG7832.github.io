@@ -133,3 +133,108 @@ class Solution {
     }
 }
 ```
+
+### 단어 변환
+```java
+class Solution {
+    public boolean compare(String a, String b) {
+        int count = 0;
+        for (int i = 0; i < a.length(); i++) {
+            if(a.charAt(i) != b.charAt(i)){
+                count++;
+            }
+        }
+        return count == 1 ? true : false;
+    }
+
+    String Target;
+    int Count;
+    boolean[] visited;
+    public int solution(String begin, String target, String[] words) {
+
+        Target = target;
+        visited = new boolean[words.length];
+
+        for (int i = 0; i < words.length; i++) {
+            if(visited[i] == false && compare(words[i], begin)){
+                visited[i] = true;
+                dfs(words, words[i], 1);
+                visited[i] = false;
+            }
+        }
+        System.out.println(Count);
+        return Count;
+    }
+
+    public void dfs(String[] words, String word, int count){
+
+        if(word.equals(Target)){
+            Count = count;
+        }
+
+        for(int i = 0; i < words.length; i++){
+            if(visited[i] == false && compare(words[i], word)){ //단어가 1개 차이나면
+                visited[i] = true;
+                dfs(words, words[i], count + 1);
+                visited[i] = false;
+            }
+        }
+    }
+}
+
+
+class Solution {
+
+    static class Node {
+        String next;
+        int edge;
+
+        public Node(String next, int edge) {
+            this.next = next;
+            this.edge = edge;
+        }
+    }
+
+    public int solution(String begin, String target, String[] words) {
+        int n = words.length, ans = 0;
+
+        // for (int i=0; i<n; i++)
+        //  if (words[i] != target && i == n-1) return 0;
+
+        Queue<Node> q = new LinkedList<>();
+
+
+        boolean[] visit = new boolean[n];
+        q.add(new Node(begin, 0));
+
+        while(!q.isEmpty()) {
+            Node cur = q.poll();
+            if (cur.next.equals(target)) {
+                ans = cur.edge;
+                break;
+            }
+
+            for (int i=0; i<n; i++) {
+                if (!visit[i] && isNext(cur.next, words[i])) {
+                    visit[i] = true;
+                    q.add(new Node(words[i], cur.edge + 1));
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    static boolean isNext(String cur, String n) {
+        int cnt = 0;
+        for (int i=0; i<n.length(); i++) {
+            if (cur.charAt(i) != n.charAt(i)) {
+                if (++ cnt > 1) return false;
+            }
+        }
+
+        return true;
+    }    
+}
+
+```
