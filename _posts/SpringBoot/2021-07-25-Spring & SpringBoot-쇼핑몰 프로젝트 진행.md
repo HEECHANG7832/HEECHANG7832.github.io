@@ -51,7 +51,7 @@ public static void bfs_list(int v, LinkedList<Integer>[] adjList, boolean[] visi
 build.gradle에서 implementation과 compile 의 차이
 
 
-
+AOP에서 값을 꼭 돌려줘야 된다
 
 
 
