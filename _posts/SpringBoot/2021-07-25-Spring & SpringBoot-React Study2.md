@@ -636,6 +636,7 @@ const IterationSample = () => {
   const [nextId, setNextId] = useState(5); // 새로운 항목을 추가할 때 사용할 id
  
   const onChange = e => setInputText(e.target.value);
+    
   const onClick = () => {
     const nextNames = names.concat({
       id: nextId, // nextId 값을 id로 설정하고
@@ -646,7 +647,15 @@ const IterationSample = () => {
     setInputText(“); // inputText를 비운다.
   };
 
-const namesList = names.map(name => <li key={name.id}>{name.text}</li>);
+  const onRemove = id => {
+    const nextNames = names.filter(name => name.id != = id);
+    setNames(nextNames);
+  };
+  const namesList = names.map(name => (
+    <li key={name.id} onDoubleClick={() => onRemove(name.id)}>
+      {name.text}
+    </li>
+  ));
   return (
     <>
       <input value={inputText} onChange={onChange} />
@@ -659,4 +668,6 @@ const namesList = names.map(name => <li key={name.id}>{name.text}</li>);
 export default IterationSample;
 ```
 
-https://thebook.io/080203/ch06/04/03/
+. 컴포넌트 배열을 렌더링할 때는 key 값 설정에 항상 주의해야 합니다. 또 key 값은 언제나 유일해야 합니다. key 값이 중복된다면 렌더링 과정에서 오류가 발생합니다.
+
+상태 안에서 배열을 변형할 때는 배열에 직접 접근하여 수정하는 것이 아니라 concat, filter 등의 배열 내장 함수를 사용하여 새로운 배열을 만든 후 이를 새로운 상태로 설정해 주어야 한다는 점을 명심하세요. 
