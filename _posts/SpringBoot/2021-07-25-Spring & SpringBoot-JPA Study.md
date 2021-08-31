@@ -291,3 +291,219 @@ public interface UserRepository extends JpaRepository<User, Long> {
         System.out.println("findByNameWithPaging : " + userRepository.findByName("martin", PageRequest.of(1, 1, Sort.by(Order.desc("id")))).getTotalElements());
     }
 ```
+
+
+
+
+
+### Entity 속성들
+
+@GenerationType - Id값 설정 규칙 지정
+
+@Table - table 의 이름이나 스키마를 직접 지정할때
+
+@Column - 필드 속성 지정, 이름 지정 가능, nullable, unique
+
+@Transient - 영속성 처리에서 제외됨 DB에서 제외되고 객체에서 값으로 존재
+
+Enum값을 넣을때 Enum값 숫자 그대로 들어간다 @Enumarated를 붙이면 ENUM 값을 스트링으로 그대로 가져감
+
+
+
+### Entity event 함수들
+
+prePersist()
+
+postPersist()
+
+preUpdate()
+
+postUpdate()
+
+preRemove()
+
+postRemove()
+
+시간을 column에 추가한다던지 기본값들 지정할때 사용
+
+
+
+@EntityListener(value = MyEntityListener.class)
+
+- Custom한 EneityListtener를 만들 수 있다
+
+수정된 내용의 히스토리가 필요한 경우
+
+```java
+public class UserEntityListener {
+    @PostPersist
+    @PostUpdate
+    public void prePersistAndPreUpdate(Object o) {
+        UserHistoryRepository userHistoryRepository = BeanUtils.getBean(UserHistoryRepository.class);
+
+        User user = (User) o;
+
+        UserHistory userHistory = new UserHistory();
+        userHistory.setName(user.getName());
+        userHistory.setEmail(user.getEmail());
+        userHistory.setUser(user);
+        userHistory.setHomeAddress(user.getHomeAddress());
+        userHistory.setCompanyAddress(user.getCompanyAddress());
+
+        userHistoryRepository.save(userHistory);
+    }
+}
+```
+
+
+
+
+
+AuditingEntityListener를 추가하고
+
+@CreatedDate
+
+​	private String createdAt;
+
+@LastModifiedDate
+
+사용하면 JPA에서 제공하는 auditing을 지원받을 수 있다
+
+@MappedSuperClass
+
+
+
+### 연관관계
+
+
+
+primitive type이 아니라면 null check를 해줘야함 primitive type은 자동으로 not null지정됨
+
+
+
+**1대 1관계**
+
+Book - BookReviewInfo
+
+```
+//Book.class
+@OneToOne(mappedBy = "book") //book에서는 bookReviewInfo id가 없게
+@ToString.Exclude
+private BookReviewInfo bookReviewInfo;
+
+//BookReviewInfo.class
+@OneToOne(optional = false)
+private Book book;
+```
+
+북 리뷰의 id를 통해서 같은 id를 가지는 book을 가져올수 있고 반대로도 된다
+
+
+
+Optional 반환값의 경우 orElseThrow를 사용해야함
+
+
+
+strategy를 AUTO로 사용해야지 hibernate_sequence를 사용한다
+
+IDENTITY는 mysql의 기본값으로 각 table마다 id를 각자 증가시킨다
+
+
+
+코드 주석은 삭제하는게 좋다
+
+
+
+기본적으로 RDB에서는 연관된 table의 id FK로 사용해서 쿼리하는데 JPA에는 다른 방식 제공
+
+@OneToOne을 선언하면 알아서 객체의 ID 컬럼을 만들어서 연관성 설정한다
+
+mappedby 속성 - 연관키를 해당 테이블에서 가지고 있지 않게 된다
+
+롬복 tostring 에서 무한 참조가 발생하기 때문에 릴레이션은 단방향으로 걸거나 toString을 제외해야한다
+
+
+
+
+
+**1대 N 관계**
+
+User - UserHistory
+
+기본 리스트의 경우에는 new ArrayList<>(); 로 기본 생성자를 생성해주는 것이 좋다
+
+```java
+//User.class
+@OneToMany(fetch = FetchType.EAGER) //Transaction 관련
+@JoinColumn(name = "user_id", insertable = false, updatable = false) //불필요한 중간 Entity가 생기는 경우 join column을 user_id로 정해주고 수정과 저장이 안되게 설정
+@ToString.Exclude
+private List<UserHistory> userHistories = new ArrayList<>();
+
+//UseHistory.class
+@Column(name = "user_id")
+private Long userId;
+```
+
+
+
+**N대 1관계**
+
+UserHistory - User
+
+```java
+@ManyToOne
+@ToString.Exclude
+private User user; //user_id를 생성해서 사용한다
+```
+
+
+
+Entity에서 필요한 연관관계를 설정해 준다
+
+User에서 UserHistory를 조회하는게 자연스러움
+
+
+
+**양방향 관계**
+
+Review
+
+```java
+//User.class
+@OneToMany
+@JoinColumn(name = "user_id") //중간 table제거
+@ToString.Exclude
+private List<Review> reviews = new ArrayList<>();
+
+//Book.class
+@OneToMany
+@JoinColumn(name = "book_id")
+@ToString.Exclude
+private List<Review> reviews = new ArrayList<>();
+
+//Review.class
+@ManyToOne(fetch = FetchType.LAZY)
+@ToString.Exclude
+private User user;
+
+@ManyToOne(fetch = FetchType.LAZY)
+@ToString.Exclude
+private Book book;
+```
+
+
+
+Publisher
+
+```java
+//Publisher.class
+@OneToMany(orphanRemoval = true)
+@JoinColumn(name = "publisher_id")
+@ToString.Exclude
+private List<Book> books = new ArrayList<>();
+
+//Book.class
+@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }) @ToString.Exclude
+private Publisher publisher;
+```
+

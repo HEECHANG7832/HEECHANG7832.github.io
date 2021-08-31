@@ -118,15 +118,19 @@ spring.datasource.initialization-mode=never
 ->spring.datasource.initialization-mode=always
 
 
+각 repository  상황마다 exception Erro 처리
+
+HTTP 코드 앞자리 2는 정상 접속을, 3은 페이지가 이동했음을, 4는 브라우저의 문제를, 5는 서버 오류를 뜻한다.
+
 
 ### Data.sql은 왜 안될까
 
     hibernate:
       ddl-auto: none #!!!!! 이거때문에 다시 만드는듯..
-	  
+
 	  확인 필요
 
-    
+    DML, DDL???
 
 
 
