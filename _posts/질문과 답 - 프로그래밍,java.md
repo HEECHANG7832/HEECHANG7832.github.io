@@ -344,3 +344,75 @@ https://12bme.tistory.com/570
 - Array와 ArrayList의 차이점은 무엇인가요?
 - char type과 string type으로 나뉘어져 있는 이유는 무엇인가요?
   - https://devlog-wjdrbs96.tistory.com/135?category=882228
+
+
+
+### 부동소수점
+
+https://steemit.com/kr/@modolee/floating-point
+
+
+
+기본적인 SELECT 
+JOIN 
+Isolation Level
+
+call by (value|reference|sharing)
+리틀 엔디안 / 빅 엔디안
+
+
+
+### 자바 키트별 차이
+
+https://medium.com/@logishudson0218/jdk-sdk-ndk-3b095101c040
+
+
+
+사용자 수준 스레드, 커널수준 스레드
+
+
+
+### 1급 객체
+
+https://velog.io/@reveloper-1311/%EC%9D%BC%EA%B8%89-%EA%B0%9D%EC%B2%B4First-Class-Object%EB%9E%80
+
+
+
+### RestTemplate
+
+https://sjh836.tistory.com/141
+
+
+
+Nginx(Apache)
+관계형데이터베이스,
+분산데이터베이스
+프로세스 생성 과정에 대해서 설명해보세요
+인터프리터
+DB 다시 처음부터
+DB문제 고민
+filter와 interpreter 차이
+JVM
+GC
+instanceOf
+foreach내부동작
+switch과if차이
+객체지향특징, 5원칙
+오버로딩/라이딩 차이 및 제한조건
+this / super
+interface / abstract 차이
+객체생성순서 / Object클래스
+다이나믹 메소드 디스패치
+String 왜 final인지 왜 불변인지
+String +연산시 객체 몇개 만들어지는지
+hashMap 충돌방지 방법
+각종 메서드 시간복잡도
+각종 JAVA 키워드
+예외 종류 ,커스텀예외
+제네릭
+디자인패턴
+어노테이션
+call by value
+람다
+enum
+쓰레드 / 동기화
