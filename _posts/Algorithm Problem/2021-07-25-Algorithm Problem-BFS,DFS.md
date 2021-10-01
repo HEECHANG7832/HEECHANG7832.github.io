@@ -238,3 +238,61 @@ class Solution {
 }
 
 ```
+
+```java
+import java.io.*;
+
+public class BOJ_4963 {
+
+	static int[][] map;
+	//static boolean[][] visited;
+	static int[] dx = {0, 0, 1, 1, 1, -1, -1, -1};
+	static int[] dy = {1, -1, 0, 1, -1, 0, 1, -1};
+	static int count;
+	
+	static void func(int x, int y) {
+		for(int i = 0 ; i < 8 ; i++) {
+			int mx = x + dx[i];
+			int my = y + dy[i];
+			if(map[mx][my] == 1) {
+				map[mx][my] = 0;
+				func(mx, my);
+			}
+		}	
+	}
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		
+		while(true) {
+			count = 0;
+
+			String[] arr = in.readLine().split(" ");
+			int r = Integer.parseInt(arr[0]);
+			int c = Integer.parseInt(arr[1]);
+
+			if(r == 0 && c == 0)
+				break;
+			
+			map = new int[c + 2][r + 2];
+
+			for(int i = 1 ; i <= c ; i++) {
+				arr = in.readLine().split(" ");
+				for(int j = 1 ; j <= r; j++) {
+					map[i][j] = Integer.parseInt(arr[j-1]);
+				}
+			}
+
+			for(int i = 1 ; i <= c ; i++) {
+				for(int j = 1 ; j <= r ; j++) {
+					if(map[i][j] == 1) {
+						count++;
+						func(i, j);
+					}
+				}
+			}
+			System.out.println(count);
+		}
+	}
+}
+```
