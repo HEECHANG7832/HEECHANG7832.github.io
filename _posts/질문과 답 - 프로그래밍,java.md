@@ -1,3 +1,7 @@
+[TOC]
+
+
+
 # 프로그래밍
 
 
@@ -384,10 +388,6 @@ https://sjh836.tistory.com/141
 
 
 
-Nginx(Apache)
-관계형데이터베이스,
-분산데이터베이스
-
 ### 프로세스 생성 과정에 대해서 설명해보세요
 
 http://yimoyimo.tk/OS-Process-Creation-and-Termination/
@@ -406,15 +406,40 @@ https://hack-gogumang.tistory.com/256
 
 컴파일 언어는 원시코드(프로그래머가 작성한 소스코드)를 모두 기계어로 변환한 후에 기계(JVM 같은 가상 머신)에 넣고 기계어 코드를 실행합니다. 소스코드를 기계어로 번역하는 빌드 과정에서는 인터프리터 언어에 비해 시간이 소요됩니다. 하지만 런타임 상황에서는 이미 기계어로 모든 소스코드가 변환되어 있기 때문에 빠르게 실행할 수 있습니다. 대표적인 언어로  C, C++이 있습니다.
 
-
-
-DB 다시 처음부터
-DB문제 고민
-filter와 interpreter 차이
 JVM
 GC
 instanceOf
-foreach내부동작
+
+
+
+### foreach내부동작
+
+https://codingdog.tistory.com/entry/java-for-each-%EB%AC%B8%EC%9D%80-arrayList%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8F%99%EC%9E%91%ED%95%A0%EA%B9%8C
+
+iterator를 사용하는데 iterator 는 cursor, hashNext(), Next()등이 있음
+
+- cursor : 현재 바라보고 있는 자료 위치
+- hashNext() : size와 cursor 비교
+- Next() : 자료 반환, cursor 증가
+
+ **순회 도중 자료구조에 변형이 일어나면 안 된다는 것입니다.** C++의 반복자 무효화에 대해서 언급할 때 이에 대해서 제가 글에서 언급을 해 드린 적이 있을 겁니다. 루틴을 도는 동안에 데이터에 변형이 있으면 곤란하다는 것이 주요 요지입니다.
+
+
+
+### 반복자 무효화
+
+벡터는 insert 연산이 수행되어서 capacity가 바뀌었을 때도 참조자가 무효화 될 수 있기 때문에 조심해야 합니다.
+
+
+
+### String 왜 final인지 왜 불변인지
+
+
+
+String +연산시 객체 몇개 만들어지는지
+
+
+
 switch과if차이
 객체지향특징, 5원칙
 오버로딩/라이딩 차이 및 제한조건
@@ -422,8 +447,7 @@ this / super
 interface / abstract 차이
 객체생성순서 / Object클래스
 다이나믹 메소드 디스패치
-String 왜 final인지 왜 불변인지
-String +연산시 객체 몇개 만들어지는지
+
 hashMap 충돌방지 방법
 각종 메서드 시간복잡도
 각종 JAVA 키워드
@@ -435,3 +459,9 @@ call by value
 람다
 enum
 쓰레드 / 동기화
+
+
+
+Nginx(Apache)
+관계형데이터베이스,
+분산데이터베이스
