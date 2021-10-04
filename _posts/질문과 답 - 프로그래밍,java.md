@@ -34,7 +34,8 @@
     자식 클래스를 사용 중일때, 거기에 부모 클래스로 치환하여도 문제가 없어야 한다.
   - Interface Segreation Principle, 인터페이스 분리 법칙
     각 행위에 대한 인터페이스는 서로 분리되어야 한다.
-    핸드폰을 예로 들면, 전화를 하는데 핸드폰 카메라가 방해가 되면 안된다는 말.
+    핸드폰을 예로 들면, 전화를 하는데 핸드폰 카메라가 방해가 되면 안된다는 말.'
+    - 클라이언트가 자신이 이용하지 않는 메서드에 의존하지 않아야 한다는 원칙이다.[[1\]](https://ko.wikipedia.org/wiki/인터페이스_분리_원칙#cite_note-ASD-1) 인터페이스 분리 원칙은 큰 덩어리의 인터페이스들을 구체적이고 작은 단위들로 분리시킴으로써 클라이언트들이 꼭 필요한 메서드들만 이용할 수 있게 한다. 이와 같은 작은 단위들을 *역할 인터페이스*라고도 부른다
   - Dependency Inversion Principle, 의존성 역전 법칙
     상위 클래스가 하위 클래스에 의존하면 안된다는 법칙. 즉 기본적인 공통되는 속성을 하위 클래스에 의존하면 안된다.
 
@@ -472,19 +473,50 @@ https://devlog-wjdrbs96.tistory.com/247#:~:text=%EB%B6%88%EB%B3%80%20%EA%B0%9C%E
 
 https://jinseongsoft.tistory.com/369
 
-
-
 https://dololak.tistory.com/700
 
 
 
-switch과if차이
-객체지향특징, 5원칙
-오버로딩/라이딩 차이 및 제한조건
-this / super
-interface / abstract 차이
-객체생성순서 / Object클래스
-다이나믹 메소드 디스패치
+
+### interface / abstract 차이
+
+https://myjamong.tistory.com/150
+
+추상클래스 사용 시기 : 상속 관계를 쭉 타고 올라갔을때 같은 조상클래스를 상속하는데 기능까지 완변히 똑같은 기능이 필요한 경우
+
+(ex. attack, printInfo)
+
+인터페이스 사용 시기 : 상속 관계를 쭉 타고 올라갔을때 다른 조상클래스를 상속하는데 같은 기능이 필요할 경우 인터페이스 사용
+
+(ex. Swimable)
+
+
+
+### 객체생성순서 / Object클래스
+
+**1. new 연산자가 input 객체에 저장될 메모리 할당**
+
+**2. 생성자가 input 객체 초기화**
+
+**3. new 연산자가 새로 생성된 객체의 주소를 input에 할당**
+
+**4. input을 통해 member로 접근 가능**
+
+
+
+상속 관계에서 자식 생성자가 호출되면 부모의 기본 생성자도 호출된다
+
+부모의 기본 생성자가 정의되어 있어야함
+
+
+
+
+
+### 다이나믹 메소드 디스패치
+
+https://velog.io/@maigumi/Dynamic-Method-Dispatch#dynamic-method-dispatch
+
+
 
 hashMap 충돌방지 방법
 각종 메서드 시간복잡도
