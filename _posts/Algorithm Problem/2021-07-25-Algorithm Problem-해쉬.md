@@ -190,3 +190,82 @@ class Solution {
 
 
 ```
+
+
+
+### 베스트 앨범
+
+```java
+import java.util.*;
+class Solution {
+    public int[] solution(String[] genres, int[] plays) {
+    int[] answer = {};
+
+        List<Integer> answerList = new ArrayList<>();
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        for(int i = 0; i < genres.length; i++){
+            hashMap.put(genres[i], hashMap.getOrDefault(genres[i], 0) + plays[i]);
+        }
+
+        List<Map.Entry<String, Integer>> entryList = new LinkedList<>(hashMap.entrySet());
+
+        entryList.sort(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+ 
+        Map<Integer, Integer> genreMap = new HashMap<>();
+
+        for(Map.Entry e: entryList){
+
+            String genre = e.getKey().toString();
+
+            for (int i = 0; i < plays.length; i++) {
+                if(genres[i].equals(genre)){
+                    genreMap.put(i, plays[i]);
+                }
+            }
+          
+
+            //정렬
+            List<Map.Entry<Integer, Integer>> list = new LinkedList<>(genreMap.entrySet());
+
+            Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+                @Override
+                public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                    if (o1.getValue() > o2.getValue()) {
+                        return -1;
+                    }
+                    else{
+                        return 1;
+                    }
+                }
+            });
+
+            int count = 0;
+            for (Map.Entry entry : list) {
+
+                if(count == 2){
+                    break;
+                }
+
+                answerList.add((Integer) entry.getKey());
+                count++;
+            }
+            genreMap.clear();
+        }
+
+        
+        answer = answerList.stream().mapToInt(Integer::intValue).toArray();
+        return answer;
+    }
+}
+```
+
+
+
+
+

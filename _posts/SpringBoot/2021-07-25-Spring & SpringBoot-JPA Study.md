@@ -507,3 +507,221 @@ private List<Book> books = new ArrayList<>();
 private Publisher publisher;
 ```
 
+
+
+
+
+### 영속성 컨텍스트
+
+
+
+영속성 - 사라지지 않고 지속적으로 처리
+
+
+
+```
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: false  // jpa의 하위 속성, 구현체와 상관없이 ddl 옵션, 
+    hibernate:
+      ddl-auto: create-drop //hibernate에서 제공하는 좀더 세밀한 옵션으로 이 옵션이 우선적으로 사용됨, 임베디드 DB를 사용하면 자동으로 create-drop으로 실행됨(H2)
+datasource:
+    url: jdbc:mysql://localhost:3306/book_manager
+    username: root
+    password:
+    initialization-mode: always //data.sql schema.sql을 실행하게 해줌
+```
+
+
+
+### Entity 캐시
+
+EntityManager는 Entity 캐시를 가지고 있다, 즉 실제 DB사이에 갭이 존재한다
+
+
+
+조회시에 @Transactional 이 선언되어 있으면 반복되는 쿼리는 자동으로 EntityCache에서 처리한다 1차 캐시
+
+**ID로 조회**를 하게 되면 캐시에 내용이 있는지 확인하고 있으면 캐시에서 처리한다
+
+
+
+@Transactional 이 존재하는 경우 delete query가 있는경우 캐시 내부에서 처리되고 실제 반영은 지연된다
+
+@Transactional을 써주면 해당 메서드나 객체 전체가 하나의 Transaction로 반영된다 없는 경우는 각각의 쿼리가 하나의 Transaction
+
+
+
+Flush를 하면 영속성 캐시가 DB에 반영됨
+
+전체 로직에 Transaction을 걸지 않으면 save 내부에도 Transaction이 있기 때문에 쿼리 하나씩 flush가 반영됨
+
+```java
+
+@SpringBootTest
+@Transactional
+public class EntityManagerTest {
+    @Autowired
+    private EntityManager entityManager;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    void entityManagerTest() {
+        System.out.println(entityManager.createQuery("select u from User u").getResultList());
+    }
+
+    @Test
+    void cacheFindTest() {
+//        System.out.println(userRepository.findByEmail("martin@fastcampus.com"));
+//        System.out.println(userRepository.findByEmail("martin@fastcampus.com"));
+//        System.out.println(userRepository.findByEmail("martin@fastcampus.com"));
+//        System.out.println(userRepository.findById(2L).get());
+//        System.out.println(userRepository.findById(2L).get());
+//        System.out.println(userRepository.findById(2L).get());
+//
+        userRepository.deleteById(1L);
+    }
+
+    @Test
+    void cacheFindTest2() {
+        User user = userRepository.findById(1L).get();
+        user.setName("marrrrrrrtin");
+        userRepository.save(user);
+
+        System.out.println("---------------------");
+
+        user.setEmail("marrrrrrtin@fastcampus.com");
+        userRepository.save(user);
+
+        System.out.println(userRepository.findAll());       // select * from user
+        //이 경우에 1번 id값만 다르기 때문에 영속성 컨텍스트와 DB값을 비교해서 merge하긴 힘들다
+        //그래서 이 경우 auto flush로 반영을 하고 findAll로 DB에서 가져온다
+    }
+}
+```
+
+
+
+### Entity 생애주기
+
+
+
+비영속상태
+
+@Trasient : 해당 컬럼은 영속성에서 제외하겠다
+
+
+
+```java
+@Service
+public class UserService {
+    @Autowired
+    private EntityManager entityManager;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transactional
+    public void put() {
+        User user = new User();
+        user.setName("newUser");
+        user.setEmail("newUser@fastcampus.com");
+
+//        userRepository.save(user);  //내부적으로 영속화 시킴
+
+        entityManager.persist(user);  //직접 호출, managed 상태가 됨, 영속성 컨텍스트가 해당 객체를 관리하게 되면 이후 setter를 통해 객체 값을 바꿔주면 Transaction이 종료되는 시점에 DB에 반영됨 굳이 save를 하지 않더라도!!
+        
+//        entityManager.detach(user); //영속성 컨텍스트에서 제외
+
+        user.setName("newUserAfterPersist");
+        entityManager.merge(user); //영속성 컨텍스트에 포함
+//        entityManager.flush();
+//        entityManager.clear(); // detach 보다 강력, 반영예정값도 다 반영안됨
+
+        User user1 = userRepository.findById(1L).get();
+        entityManager.remove(user1); //해당 entity는 더이상 사용할 수 없음
+
+        user1.setName("marrrrrrrtin");
+        entityManager.merge(user1);
+    }
+}
+
+```
+
+
+
+### 트렌젝션 매니저
+
+```java
+//    @Transactional(propagation = Propagation.REQUIRED)
+    public void putBookAndAuthor() {
+        Book book = new Book();
+        book.setName("JPA 시작하기");
+
+        bookRepository.save(book);
+
+        try {
+            authorService.putAuthor();
+        } catch (RuntimeException e) {
+        }
+
+        throw new RuntimeException("오류가 발생하였습니다. transaction은 어떻게 될까요?");
+
+//        Author author = new Author();
+//        author.setName("martin");
+//
+//        authorRepository.save(author);
+//
+//        throw new RuntimeException("오류가 나서 DB commit이 발생하지 않습니다");
+    }
+```
+
+
+
+RuntimeException이 발생하면 Rollback
+
+CheckedException이 발생하면 프로그래머가 핸들링 해야하고 Rollback도 되지 않는다
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
