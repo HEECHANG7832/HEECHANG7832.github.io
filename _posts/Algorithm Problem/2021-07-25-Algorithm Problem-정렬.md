@@ -111,3 +111,48 @@ class Solution {
     }
 }
 ```
+
+
+
+### h-index
+
+```java
+import java.util.*;
+
+public class Solution{
+    public static void main(String[] args) {
+
+        int answer = 0;
+        int[] citations = {9, 7, 6, 2, 1}; //3
+
+        Integer citations1[] = Arrays.stream(citations).boxed().toArray(Integer[]::new);
+        Arrays.sort(citations1, Collections.reverseOrder());
+
+
+        //h번 이상 인용된 논문이 h편 이상 나머지가 h 이하
+
+        for (int i = 0; i < citations1.length; i++) {
+
+            if(i + 1 <= citations1[i]){
+                answer = i + 1;
+            }
+        }
+        System.out.println(answer);
+    }
+}
+
+class Solution {
+    public int solution(int[] citations) {
+        Arrays.sort(citations);
+
+        int max = 0;
+        for(int i = citations.length-1; i > -1; i--){
+            int min = (int)Math.min(citations[i], citations.length - i);
+            if(max < min) max = min;
+        }
+
+        return max;
+    }
+}
+```
+

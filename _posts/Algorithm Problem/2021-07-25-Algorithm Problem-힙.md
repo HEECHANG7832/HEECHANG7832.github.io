@@ -92,3 +92,43 @@ class Solution {
 }
 ```
 
+
+
+### 이중 우선순위
+
+```java
+import java.util.*;
+class Solution {
+    public int[] solution(String[] operations) {
+       int[] answer = new int[2];
+        //String[] operations = {"I 16", "I -5643", "D -1", "D 1", "D 1", "I 123", "D -1"};
+
+        PriorityQueue<Integer> pqMin = new PriorityQueue<>();
+        PriorityQueue<Integer> pqMax = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (String s : operations) {
+            String[] sp = s.split(" ");
+            if(sp[0].equals("I")){
+                pqMax.add(Integer.parseInt(sp[1]));
+                pqMin.add(Integer.parseInt(sp[1]));
+            }else {
+
+
+                //최댓값 삭제
+                if (sp[1].equals("-1")) {
+                    pqMax.remove(pqMin.poll());
+
+                    //최솟값 빼기
+                } else {
+                    pqMin.remove(pqMax.poll());
+                }
+            }
+        }
+
+        answer[0] = pqMax.peek() != null ? pqMax.peek() : 0;
+        answer[1] = pqMin.peek() != null ? pqMin.peek() : 0;
+        return answer;
+    }
+}
+```
+
