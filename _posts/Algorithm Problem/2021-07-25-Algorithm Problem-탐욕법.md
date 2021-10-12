@@ -216,3 +216,121 @@ class Solution {
     }
 }
 ```
+
+
+
+### 조이스틱
+
+
+
+```java
+public int solution(String name) {
+  int answer = 0;
+  int len = name.length();
+
+  // 제일 짧은 좌, 우 이동은 그냥 맨 오른쪽으로 이동할 때
+  int min = len - 1;
+
+  for (int i = 0; i < len; i++) {
+    // 조이스틱 상, 하 이동
+    char c = name.charAt(i);
+    int mov = (c - 'A' < 'Z' - c + 1) ? (c - 'A') : ('Z' - c + 1);
+    answer += mov;
+
+    // 조이스틱 좌, 우 이동
+    int nextIndex = i + 1;
+    // 다음 단어가 A이고, 단어가 끝나기 전까지 nextIndex 증가
+    while (nextIndex < len && name.charAt(nextIndex) == 'A')
+      nextIndex++;
+
+    min = Math.min(min, (i * 2) + len - nextIndex);
+  }
+
+  answer += min;
+
+  return answer;
+}
+```
+
+
+
+### 섬 연결하기
+
+```JAVA
+import java.util.*;
+
+class Solution {
+    
+    static int[] parent;
+    
+    public int solution(int n, int[][] costs) {
+        
+        Arrays.sort(costs, (int[] c1, int[] c2) -> c1[2] - c2[2]);
+        
+        parent = new int[n];
+        
+        for(int i = 0; i < n; i++)
+        {
+            parent[i] = i;            
+        }
+        
+        int total = 0;
+        for(int[] edge : costs)
+        {
+            int from = edge[0];
+            int to = edge[1];
+            int cost = edge[2];
+            
+            int fromParent = findParent(from);
+            int toParent = findParent(to);
+            
+            if(fromParent == toParent) continue;
+            
+            total += cost;
+            parent[toParent] = fromParent;
+        }
+        return total;
+    }
+    
+    private int findParent(int node){
+        if(parent[node] == node) return node;
+        return parent[node] = findParent(parent[node]);
+    }
+}
+```
+
+
+
+### 단속카메라
+
+```java
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+    public int solution(int[][] routes) {
+        int answer = 0;
+        
+        Arrays.sort(routes, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] route1, int[] route2) {
+                return route1[1] - route2[1];
+            }
+        });
+        
+        int cam = Integer.MIN_VALUE;
+        
+        for(int[] route : routes) {
+            if(cam < route[0]) {
+                // 현재 카메라의 위치가 route의 시작 지점보다 작으면
+                // 새로운 cam을 route의 종료 지점에 설치한다
+                cam = route[1];
+                answer++;
+            }
+        }
+        
+        return answer;
+    }
+}
+```
+

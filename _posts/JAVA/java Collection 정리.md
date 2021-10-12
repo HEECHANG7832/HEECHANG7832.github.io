@@ -673,6 +673,8 @@ priorityQueue.poll();
 priorityQueue.clear();
 priorityQueue.peek();       // priorityQueue에 첫번째 값 참조 = 1
 
+PriorityQueue<T> pq = new PriorityQueue<>(initialCapacity, (e1, e2) -> { return e1.compareTo(e2); });
+
 ```
 
 
