@@ -74,13 +74,10 @@ public class Sort{
         Arrays.sort(arr);
         Arrays.sort(arr, 0, 4); // 0,1,2,3 요소만
         Arrays.sort(arr,Collections.reverseOrder()); //내림차순
-
-
-
     }
 }
 
-//Custom
+//class로 구현
 class CustomComparator implements Comparator<int[]> {
     @Override
     public int compare(int[] cost1, int[] cost2) {
@@ -93,13 +90,28 @@ class CustomComparator implements Comparator<int[]> {
         }
     }
 }
-String[] stringArr = new String[] {"A","C","B","E","D"}; Arrays.sort(stringArr,new CustomComparator());
+String[] stringArr = new String[] {"A","C","B","E","D"};
+Arrays.sort(stringArr, new CustomComparator());
 
+//익명 클래스
+// 문자 길이로 sorting (오름차순)
+Collections.sort(strings, new Comparator<String>() {
+    @Override
+    public int compare(String s1, String s2) {
+        return s1.length() - s2.length();
+    }
+});
 
+//익명 클래스 람다식
+// 문자 길이로 sorting (오름차순)
+Collections.sort(strings, (s1, s2) -> s1.length() - s2.length());
+Arrays.sort(jobs, (o1, o2) -> o1[0] - o2[0]);
+Arrays.sort(costs, (int[] c1, int[] c2) -> c1[2] - c2[2]);
+
+//객체에 Comparable 구현
 class People implements Comparable {
 
  	//Property
-   
     @Override
     public int compareTo(People people) {
          // TODO Auto-generated method stub
@@ -113,12 +125,19 @@ class People implements Comparable {
      }
 }
 
+//Stream 사용
 String str = "ACBED"; String[] stringArr = str.split(""); // new String[] {"A","C","F","E","D"} 배열로 변환 
-String streamSortASC = Stream.of(stringArr).sorted().collect(Collectors.joining()); //오름차순 String 
-streamSortDESC = Stream.of(stringArr).sorted(Comparator.reverseOrder()).collect(Collectors.joining()); // 내림차순
+
+String streamSortASC = 
+    Stream.of(stringArr).sorted().collect(Collectors.joining()); //오름차순 String 
+String streamSortDESC =
+    Stream.of(stringArr).sorted(Comparator.reverseOrder()).collect(Collectors.joining()); // 내림차순
+
 //Lambda
-String streamSortASC_Lambda = Stream.of(stringArr).sorted((o1,o2)->o1.compareTo(o2)).collect(Collectors.joining()); //오름차순
-String streamSortDESC_Lambda = Stream.of(stringArr).sorted((o1,o2)->o2.compareTo(o1)).collect(Collectors.joining()); // 내림차순
+String streamSortASC_Lambda = 
+    Stream.of(stringArr).sorted((o1,o2)->o1.compareTo(o2)).collect(Collectors.joining()); //오름차순
+String streamSortDESC_Lambda = 
+    Stream.of(stringArr).sorted((o1,o2)->o2.compareTo(o1)).collect(Collectors.joining()); // 내림차순
 
 ```
 
@@ -495,7 +514,10 @@ list.remove(1);  //index 1 제거
 list.clear();  //모든 값 제거
 list.size(); //list 크기
 list.get(0); //0번 index출력
-	
+
+ArrayList<String> convertedArr = new ArrayList<>();
+convertedArr.sort((num1, num2)-> (num1+num2).compareTo(num2+num1));
+
 for(Integer i : list) { //for문을 통한 전체출력
     System.out.println(i);
 }
@@ -665,8 +687,10 @@ PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
 //int형 priorityQueue 선언 (우선순위가 높은 숫자 순)
 PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
 
+int[] scoville
 PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
-PriorityQueue<Integer> pq= new PriorityQueue<>(Arrays.stream(scoville).boxed().collect(Collectors.toList()));
+PriorityQueue<Integer> pq =
+    new PriorityQueue<>(Arrays.stream(scoville).boxed().collect(Collectors.toList()));
 
 priorityQueue.add(1);  
 priorityQueue.poll(); 
@@ -674,7 +698,7 @@ priorityQueue.clear();
 priorityQueue.peek();       // priorityQueue에 첫번째 값 참조 = 1
 
 PriorityQueue<T> pq = new PriorityQueue<>(initialCapacity, (e1, e2) -> { return e1.compareTo(e2); });
-
+PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
 ```
 
 
@@ -768,7 +792,6 @@ hashMap.getOrDefault(player, 0)
 hashMap.put(player, hashMap.getOrDefault(player, 0) + 1);
 
 //순회
-
 //entrySet() 활용
 for (Entry<Integer, String> entry : map.entrySet()) {
     System.out.println("[Key]:" + entry.getKey() + " [Value]:" + entry.getValue());
@@ -808,19 +831,31 @@ Iterator iter = set.iterator();	// Iterator 사용
 while(iter.hasNext()) {//값이 있으면 true 없으면 false
     System.out.println(iter.next());
 }
-
-
-//테크닉
 //중복 제거
 HashSet<String> hashSet = (HashSet<String>) Arrays.stream(phone_book).collect(Collectors.toSet());
 
+//Map -> List -> 정렬 
+List<Map.Entry<Integer, Integer>> list = new LinkedList<>(genreMap.entrySet());
+
+Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+    @Override
+    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+        if (o1.getValue() > o2.getValue()) {
+            return -1;
+        }
+        else{
+            return 1;
+        }
+    }
+});
+
+//테크닉
 //리스트, 배열 출력방법
 queue.stream().forEach(temp -> System.out.println(temp));
 System.out.println(Arrays.toString(answer));
 
 //정수 나눗셈시 나머지가 잘릴 수 있다
 int days = (int)Math.ceil((100 - progresses[i]) / (double)speeds[i]);
-
 
 //변환
 //int 배열 Integer 배열
@@ -831,22 +866,21 @@ Integer b[] = Arrays.stream(a).boxed().toArray(Integer[]::new);
 Integer a[] = {1,2,3,4};
 int b[] = Arrays.stream(a).mapToInt(Integer::intValue).toArray(); 
 
+//Integer 리스트를 int 배열로 변경방법
+int[] answer = list.stream().mapToInt(Integer::intValue).toArray();
+
 // To boxed list
 List<Integer> you  = Arrays.stream( data ).boxed().collect( Collectors.toList() );
 List<Integer> like = IntStream.of( data ).boxed().collect( Collectors.toList() );
-
-//Integer 리스트를 int 배열로 변경방법
-int[] answer = list.stream().mapToInt(Integer::intValue).toArray();
 
 //String 배열을 리스트로 리스트를 배열로
 List<String> arrayList = Arrays.asList("a","b","C");
 String[] array = arrayList.toArray(arrayList);
 
-
 //int list to LinkedList
 Queue<Integer> queue = (LinkedList<Integer>) Arrays.stream(priorities).boxed().collect(Collectors.toList());
-
-Queue<Integer> queue = new LinkedList<Integer>(Arrays.stream(truck_weights).boxed().collect(Collectors.toList()));
+Queue<Integer> queue = 
+    new LinkedList<Integer>(Arrays.stream(truck_weights).boxed().collect(Collectors.toList()));
 
 ```
 
