@@ -479,6 +479,8 @@ public class Queue<E>{
 
 
 
+### ArrayList, LinkedList
+
 ```java
 
 //입력
@@ -517,6 +519,18 @@ list.get(0); //0번 index출력
 
 ArrayList<String> convertedArr = new ArrayList<>();
 convertedArr.sort((num1, num2)-> (num1+num2).compareTo(num2+num1));
+
+ArrayList<Integer> list = new ArrayList<>();
+list.add(1);
+list.add(4);
+list.add(6);
+list.add(2);
+list.add(5);
+
+System.out.println("정렬 전  : " + list.toString());
+list.sort(null);
+list.sort(Comparator.reverseOrder());
+System.out.println("오름차순 : " + list.toString());
 
 for(Integer i : list) { //for문을 통한 전체출력
     System.out.println(i);
@@ -582,6 +596,8 @@ queue.peek();       // queue의 첫번째 값 참조
 
 
 
+### HashMap, HashSet
+
 Map
 
 - HashMap
@@ -609,6 +625,79 @@ Map
 - https://coding-factory.tistory.com/555?category=758267
 - LinkedHashSet
   LinkedList로 구현된 HashSet. 순서를 보장한다.
+
+```java
+
+//HashMap
+HashMap<String,Integer> hashMap = new HashMap<String,Integer>();
+
+hashMap.containsKey(1);
+hashMap.get(1); //key로 찾기
+hashMap.put(1, "사과"); //key 에 넣기
+hasnMap.remove(1); //key값 제거
+hashMap.clear(); //모든 값 제거
+
+hashMap.getOrDefault(player, 0)
+hashMap.put(player, hashMap.getOrDefault(player, 0) + 1);
+
+//순회
+//entrySet() 활용
+for (Entry<Integer, String> entry : map.entrySet()) {
+    System.out.println("[Key]:" + entry.getKey() + " [Value]:" + entry.getValue());
+}
+
+//KeySet() 활용
+for(Integer i : map.keySet()){ //저장된 key값 확인
+    System.out.println("[Key]:" + i + " [Value]:" + map.get(i));
+}
+
+//interator
+Iterator<Entry<Integer, String>> entries = map.entrySet().iterator();
+while(entries.hasNext()){
+    Map.Entry<Integer, String> entry = entries.next();
+    System.out.println("[Key]:" + entry.getKey() + " [Value]:" +  entry.getValue());
+}
+
+
+//HashSet
+//HashSet은 객체를 저장하기 전에 먼저 객체의 hashCode()메소드를 호출해서 해시 코드를 얻어낸 다음 저장되어 있는 객체들의 해시 코드와 비교한 뒤 같은 해시 코드가 있다면 다시 equals() 메소드로 두 객체를 비교해서 true가 나오면 동일한 객체로 판단하고 중복 저장을 하지 않습니다. 문자열을 HashSet에 저장할 경우, 같은 문자열을 갖는 String객체는 동일한 객체로 간주되고 다른 문자열을 갖는 String객체는 다른 객체로 간주되는데, 그 이유는 String클래스가 hashCode()와 equals() 메소드를 재정의해서 같은 문자열일 경우 hashCode()의 리턴 값을 같게, equals()의 리턴 값은 true가 나오도록 했기 때문입니다.
+
+
+HashSet<Integer> set1 = new HashSet<Integer>();//HashSet생성
+HashSet<Integer> set2 = new HashSet<>();//new에서 타입 파라미터 생략가능
+HashSet<Integer> set3 = new HashSet<Integer>(set1);//set1의 모든 값을 가진 HashSet생성
+HashSet<Integer> set4 = new HashSet<Integer>(10);//초기 용량(capacity)지정
+HashSet<Integer> set5 = new HashSet<Integer>(10, 0.7f);//초기 capacity,load factor지정
+HashSet<Integer> set6 = new HashSet<Integer>(Arrays.asList(1,2,3));//초기값 지정
+set.add(1); //값 추가
+set.add(2);
+set.add(3);
+set.remove(1);//값 1 제거
+set.clear();//모든 값 제거
+set.size();
+set.contains(1);
+Iterator iter = set.iterator();	// Iterator 사용
+while(iter.hasNext()) {//값이 있으면 true 없으면 false
+    System.out.println(iter.next());
+}
+//중복 제거
+HashSet<String> hashSet = (HashSet<String>) Arrays.stream(phone_book).collect(Collectors.toSet());
+
+//Map -> List -> 정렬 
+List<Map.Entry<Integer, Integer>> list = new LinkedList<>(genreMap.entrySet());
+
+Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+    @Override
+    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+        if (o1.getValue() > o2.getValue()) {
+            return -1;
+        }
+        else{
+            return 1;
+        }
+    }
+});
+```
 
 
 
@@ -779,76 +868,6 @@ public class Main {
 
 ```java
 
-//HashMap
-HashMap<String,Integer> hashMap = new HashMap<String,Integer>();
-
-hashMap.containsKey(1);
-hashMap.get(1); //key로 찾기
-hashMap.put(1, "사과"); //key 에 넣기
-hasnMap.remove(1); //key값 제거
-hashMap.clear(); //모든 값 제거
-
-hashMap.getOrDefault(player, 0)
-hashMap.put(player, hashMap.getOrDefault(player, 0) + 1);
-
-//순회
-//entrySet() 활용
-for (Entry<Integer, String> entry : map.entrySet()) {
-    System.out.println("[Key]:" + entry.getKey() + " [Value]:" + entry.getValue());
-}
-
-//KeySet() 활용
-for(Integer i : map.keySet()){ //저장된 key값 확인
-    System.out.println("[Key]:" + i + " [Value]:" + map.get(i));
-}
-
-//interator
-Iterator<Entry<Integer, String>> entries = map.entrySet().iterator();
-while(entries.hasNext()){
-    Map.Entry<Integer, String> entry = entries.next();
-    System.out.println("[Key]:" + entry.getKey() + " [Value]:" +  entry.getValue());
-}
-
-
-//HashSet
-//HashSet은 객체를 저장하기 전에 먼저 객체의 hashCode()메소드를 호출해서 해시 코드를 얻어낸 다음 저장되어 있는 객체들의 해시 코드와 비교한 뒤 같은 해시 코드가 있다면 다시 equals() 메소드로 두 객체를 비교해서 true가 나오면 동일한 객체로 판단하고 중복 저장을 하지 않습니다. 문자열을 HashSet에 저장할 경우, 같은 문자열을 갖는 String객체는 동일한 객체로 간주되고 다른 문자열을 갖는 String객체는 다른 객체로 간주되는데, 그 이유는 String클래스가 hashCode()와 equals() 메소드를 재정의해서 같은 문자열일 경우 hashCode()의 리턴 값을 같게, equals()의 리턴 값은 true가 나오도록 했기 때문입니다.
-
-
-HashSet<Integer> set1 = new HashSet<Integer>();//HashSet생성
-HashSet<Integer> set2 = new HashSet<>();//new에서 타입 파라미터 생략가능
-HashSet<Integer> set3 = new HashSet<Integer>(set1);//set1의 모든 값을 가진 HashSet생성
-HashSet<Integer> set4 = new HashSet<Integer>(10);//초기 용량(capacity)지정
-HashSet<Integer> set5 = new HashSet<Integer>(10, 0.7f);//초기 capacity,load factor지정
-HashSet<Integer> set6 = new HashSet<Integer>(Arrays.asList(1,2,3));//초기값 지정
-set.add(1); //값 추가
-set.add(2);
-set.add(3);
-set.remove(1);//값 1 제거
-set.clear();//모든 값 제거
-set.size();
-set.contains(1);
-Iterator iter = set.iterator();	// Iterator 사용
-while(iter.hasNext()) {//값이 있으면 true 없으면 false
-    System.out.println(iter.next());
-}
-//중복 제거
-HashSet<String> hashSet = (HashSet<String>) Arrays.stream(phone_book).collect(Collectors.toSet());
-
-//Map -> List -> 정렬 
-List<Map.Entry<Integer, Integer>> list = new LinkedList<>(genreMap.entrySet());
-
-Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-    @Override
-    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-        if (o1.getValue() > o2.getValue()) {
-            return -1;
-        }
-        else{
-            return 1;
-        }
-    }
-});
-
 //테크닉
 //리스트, 배열 출력방법
 queue.stream().forEach(temp -> System.out.println(temp));
@@ -881,6 +900,38 @@ String[] array = arrayList.toArray(arrayList);
 Queue<Integer> queue = (LinkedList<Integer>) Arrays.stream(priorities).boxed().collect(Collectors.toList());
 Queue<Integer> queue = 
     new LinkedList<Integer>(Arrays.stream(truck_weights).boxed().collect(Collectors.toList()));
+
+
+//최대 최소
+List<Integer> intList = Arrays.asList(2, 3, 6, 4, 10, 23);
+        Integer maxValue = intList.stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElseThrow(NoSuchElementException::new);
+
+List<Integer> intList = Arrays.asList(2, 3, 6, 4, 23, 10);
+        Integer maxValue = intList.stream()
+                .max(Comparator.comparing(x -> x))
+                .orElseThrow(NoSuchElementException::new);
+
+ int[] intArr = {3, 2, 6, 10, 234};
+        Integer maxValue = Arrays.stream(intArr)
+                .max()
+                .getAsInt();
+
+//평균
+
+//원시배열
+Arrays.stream(arr).average().orElse(0);
+
+//리스트
+List<Integer> list = new ArrayList<>();
+double avg = list.stream().mapToInt(Integer::intValue).average().getAsDouble();
+
+
+map.entrySet().stream().forEach(entry-> {
+	System.out.println("[key]:" + entry.getKey() + ", [value]:"+entry.getValue());
+});
 
 ```
 
